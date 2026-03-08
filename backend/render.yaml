@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: roastmyrepo-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./roasts.db
+      - key: FRONTEND_URL
+        value: https://roastmyrepo.vercel.app
+      - key: ENVIRONMENT
+        value: production
+    healthCheckPath: /api/health
