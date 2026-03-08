@@ -17,9 +17,15 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="RoastMyRepo API", lifespan=lifespan)
 
+cors_origins = [
+    origin.strip().rstrip("/")
+    for origin in settings.frontend_url.split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_url],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
@@ -34,4 +40,5 @@ async def health():
         "status": "ok",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "environment": settings.environment,
+        "cors_origins": cors_origins,
     }
