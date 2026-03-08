@@ -126,6 +126,22 @@
 
 ---
 
+## Phase 10: CI Fix + Frontend Tests (v1.1.0)
+**Status**: complete
+
+### Tasks
+- [x] Diagnose Deploy Frontend CI failure (`Error: spawn sh ENOENT` in `vercel build`)
+- [x] Fix deploy-frontend.yml: replace 3-step `pull/build/deploy --prebuilt` with `vercel deploy --prod`
+- [x] Install Vitest, jsdom, @testing-library/react, @testing-library/jest-dom, @testing-library/user-event
+- [x] Configure Vitest in vite.config.ts with jsdom environment
+- [x] `ScoreBadge.test.tsx` — 8 tests: animation, sizes, color thresholds (green/yellow/orange/red)
+- [x] `BrutalitySlider.test.tsx` — 6 tests: label display, emoji indicators, all 5 levels
+- [x] `RoastForm.test.tsx` — 7 tests: render, validation on blur/submit, submit with valid URL
+- [x] Add `npx vitest run` to CI workflow
+- [x] All 21 frontend tests pass, tsc --noEmit clean
+
+---
+
 ## Decisions Log
 
 | Decision | Rationale |
@@ -137,3 +153,5 @@
 | async_session patching in tests | Router uses async_session directly, not DI |
 | CI triggers on push to main + PRs | Covers both direct pushes and PR workflows |
 | Deploy workflows use env vars for secrets | Security best practice per GH Actions guidelines |
+| `vercel deploy --prod` over `vercel build` + `deploy --prebuilt` | `vercel build` fails in GH Actions with `spawn sh ENOENT`; direct deploy builds on Vercel's servers |
+| Vitest with jsdom for frontend tests | Vite-native test runner, zero extra config, fast |
