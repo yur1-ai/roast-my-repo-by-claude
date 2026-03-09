@@ -40,5 +40,4 @@ async def health():
         "status": "ok",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "environment": settings.environment,
-        "cors_origins": cors_origins,
     }
