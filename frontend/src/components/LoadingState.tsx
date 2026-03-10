@@ -6,8 +6,8 @@ interface LoadingStateProps {
 
 const STATUS_TEXT: Record<string, { text: string; icon: string }> = {
   pending: { text: "Queueing your roast...", icon: "\u23F3" },
-  analyzing: { text: "Scanning the codebase...", icon: "\U0001F440" },
-  roasting: { text: "Generating burns...", icon: "\U0001F525" },
+  analyzing: { text: "Scanning the codebase...", icon: "\u{1F440}" },
+  roasting: { text: "Generating burns...", icon: "\u{1F525}" },
 };
 
 export default function LoadingState({ status }: LoadingStateProps) {
