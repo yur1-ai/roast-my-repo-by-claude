@@ -17,7 +17,7 @@ services:
       - key: DATABASE_URL
         value: sqlite+aiosqlite:///./roasts.db
       - key: FRONTEND_URL
-        value: https://roast-my-repo-by-claude.vercel.app
+        value: https://roast-my-repo-by-claude.vercel.app,https://yur.one
       - key: ENVIRONMENT
         value: production
     healthCheckPath: /api/health
